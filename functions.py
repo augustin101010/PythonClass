@@ -1,4 +1,4 @@
-import random
+from random import random
 
 areAllModular = lambda arr,m,r : ( (arr[0]%m==r and areAllEven(arr[:-1])) if len(arr) else True )
 modularOnly   = lambda l,h,m,r : [ i for i in range(l,h) if (i%m)==r ]
