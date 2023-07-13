@@ -52,3 +52,69 @@ def grade(key, problem):
         return
     
     print("Correct!")
+    
+    
+def grade2(key, problem):
+    
+    ntrials = 50
+    randmax = 33
+    count = 0
+    
+    if key == "hw2_p1a":
+        sol = lambda num : [ i for i in arr if i%2 == 0 ]
+        for _ in range(ntrials):
+            arr = []
+            nelem = int(randmax*random())
+            for _ in range(nelem):
+                arr.append(int(randmax*random()))
+            if problem(arr) == sol(arr):
+                count += 1
+        print(count,"/",ntrials,"tests passed")
+        
+    if key == "hw2_p1b":
+        sol = lambda arr : [ i for i in range(1,num+1) if num%i==0 ]
+        for _ in range(ntrials):
+            num = int(randmax**3*random())
+            if problem(num) == sol(num):
+                count += 1
+        print(count,"/",ntrials,"tests passed")
+        
+    if key == "hw2_p1c":
+        sol = lambda n1,n2,n3 : min(n1,n2,n3)
+        for _ in range(ntrials):
+            nums = [ int(randmax**3*random()) for i in range(3)]
+            if problem(*nums) == sol(*nums):
+                count += 1
+        print(count,"/",ntrials,"tests passed")
+    
+    if key == "hw2_p2a":
+        sol = lambda n1,n2,n3 : max(n1,n2,n3) - min(n1,n2,n3)
+        for _ in range(ntrials):
+            nums = [ int(randmax**3*random()) for i in range(3)]
+            if problem(*nums) == sol(*nums):
+                count += 1
+        print(count,"/",ntrials,"tests passed")
+    
+    if key == "hw2_p2b":
+        sol = lambda c,arr : sol(c+arr[0]%2,arr[1:]) if len(arr) else c
+        for _ in range(ntrials):
+            nelem = int(12*random())
+            nums  = [ int(randmax**3*random()) for i in range(nelem)]
+            if problem(nums) == sol(0,nums):
+                count += 1
+        print(count,"/",ntrials,"tests passed")
+    
+    if key == "hw2_p2c":
+        sol = lambda p,n : p if n%3!=0 else sol(p+1,n/3)
+        for _ in range(ntrials):
+            num  =  int(randmax**3*random())
+            if problem(num) == sol(0,num):
+                count += 1
+        print(count,"/",ntrials,"tests passed")
+    
+    
+    
+    if count != ntrials:
+        print("Incorrect!")
+    else:
+        print("Correct!")
